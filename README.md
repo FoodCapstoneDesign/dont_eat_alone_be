@@ -1,4 +1,4 @@
-# SinChangFoodStore
+# MealMate
 ## 기능 추가
 <로그인>
 1. SNS 연동로그인
