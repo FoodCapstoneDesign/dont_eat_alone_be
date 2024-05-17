@@ -64,7 +64,7 @@ public class RestaurantService {
     }
 
     public List<RestaurantInfo> showBestRestaurants() {
-        return restaurantRepository.find3TopByLikeCount()
+        return restaurantRepository.findTop3ByOrderByLikeCountDesc()
             .stream()
             .map(RestaurantInfo::fromEntity)
             .toList();

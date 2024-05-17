@@ -9,5 +9,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
 
     List<Restaurant> findAllByRestaurantType(String restaurantType);
 
-    List<Restaurant> find3TopByLikeCount();
+    List<Restaurant> findTop3ByOrderByLikeCountDesc();
 }
