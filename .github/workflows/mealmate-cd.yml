@@ -69,15 +69,15 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
           echo "git will pull origin : [${{ needs.env.outputs.branch }}]"
           echo "git checkout finish"
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/distance-0.0.1-snapshot .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mealmate-0.0.1-snapshot .
           echo "docker build finish"        
-          docker push ${{ secrets.DOCKER_USERNAME }}/distance-0.0.1-snapshot
+          docker push ${{ secrets.DOCKER_USERNAME }}/mealmate-0.0.1-snapshot
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
         with:
-          key: ${{ secrets.AWS_DEV_SSH_PRIVATE_KEY }}
-          host: ${{ secrets.AWS_DEV_HOST }}
+          key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           port: ${{ secrets.AWS_PORT }}
           script: |
@@ -86,4 +86,4 @@ jobs:
             sudo docker rm ${{ secrets.DOCKER_APP_CONTAINER }}
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/distance-0.0.1-snapshot
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/distance-0.0.1-snapshot
-            sudo docker-compose -f ${{ secrets.DEV_DOCKER_COMPOSE_PATH }} up -d
+            sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_PATH }} up -d
