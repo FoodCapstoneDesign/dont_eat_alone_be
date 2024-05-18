@@ -29,7 +29,7 @@ services:
     links:
       - db
     networks:
-      - spring-network
+      - mealmate-network
     restart: always
 
   nginx:
