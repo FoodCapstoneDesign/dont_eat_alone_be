@@ -52,8 +52,8 @@ public class Restaurant {
     private Double grade;
 
     @Column(name = "open_at")
-    private LocalDateTime openAt;
+    private String openAt;
 
     @Column(name = "close_at")
-    private LocalDateTime closeAt;
+    private String closeAt;
 }

@@ -12,8 +12,8 @@ public record RestaurantDetailInfo(
     String restaurantType,
     int likeCount,
     double grade,
-    LocalDateTime openAt,
-    LocalDateTime closeAt,
+    String openAt,
+    String closeAt,
     String restaurantNotice,
     List<MenuInfo> menuList) {
 
