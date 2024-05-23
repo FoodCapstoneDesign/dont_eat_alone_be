@@ -18,10 +18,10 @@ public class BaseTimeEntity {
     @CreationTimestamp
     @Column(name = "create_dt")
     @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDateTime createDt;
+    public LocalDateTime createDt;
 
     @UpdateTimestamp
     @Column(name = "modify_dt")
     @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDateTime modifyDt;
+    public LocalDateTime modifyDt;
 }
