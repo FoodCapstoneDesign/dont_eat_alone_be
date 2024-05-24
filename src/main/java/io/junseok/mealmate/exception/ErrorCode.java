@@ -6,8 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-    EXIST_NICKNAME(HttpStatusCode.BAD_REQUEST.getStatus(),"이미 존재하는 닉네임입니다!"),
-    EXIST_LOGIN_ID(HttpStatusCode.BAD_REQUEST.getStatus(), "이미 존재하는 ID 입니다!"),
     EXIST_EMAIL(HttpStatusCode.BAD_REQUEST.getStatus(), "이미 존재하는 Email 입니다!"),
     EXIST_WISHLIST(HttpStatusCode.CONFLICT.getStatus(), "이미 찜 하였습니다!"),
 
@@ -17,7 +15,7 @@ public enum ErrorCode {
 
     NOT_EXIST_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.getStatus(), "Security Context에 인증 정보가 없습니다!"),
     NOT_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.getStatus(), "게시판 삭제 권한이 없습니다!"),
-    EXIST_LIKECOUNT(HttpStatusCode.CONFLICT.getStatus(), "이미 좋아요를 눌렀습니다!");
+    EXIST_LIKE_COUNT(HttpStatusCode.CONFLICT.getStatus(), "이미 좋아요를 눌렀습니다!");
     private final int status;
     private final String message;
 }
