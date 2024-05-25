@@ -40,7 +40,7 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/check-email")
+    @PostMapping("/check-email")
     public ResponseEntity<Void> checkEmail(@RequestBody EmailCheck emailCheck){
         memberService.validEmail(emailCheck.email());
         return ResponseEntity.ok().build();
