@@ -15,6 +15,7 @@ public enum ErrorCode {
 
     NOT_EXIST_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.getStatus(), "Security Context에 인증 정보가 없습니다!"),
     NOT_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.getStatus(), "게시판 삭제 권한이 없습니다!"),
+    INVALID_EMAIL_FORMAT(HttpStatusCode.BAD_REQUEST.getStatus(),"이메일 형식이 올바르지 않습니다"),
     EXIST_LIKE_COUNT(HttpStatusCode.CONFLICT.getStatus(), "이미 좋아요를 눌렀습니다!");
     private final int status;
     private final String message;

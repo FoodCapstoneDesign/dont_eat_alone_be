@@ -1,12 +1,14 @@
 package io.junseok.mealmate.domain.member.presentation;
 
 
+import io.junseok.mealmate.domain.member.dto.request.EmailCheck;
 import io.junseok.mealmate.domain.member.dto.request.SignUpDto;
 import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto;
 import io.junseok.mealmate.domain.member.service.MemberService;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.converter.RsaKeyConverters;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +37,12 @@ public class MemberController {
     @DeleteMapping
     public ResponseEntity<Void> deleteMember(Principal principal){
         memberService.resignMember(principal.getName());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/check-email")
+    public ResponseEntity<Void> checkEmail(@RequestBody EmailCheck emailCheck){
+        memberService.validEmail(emailCheck.email());
         return ResponseEntity.ok().build();
     }
 }
