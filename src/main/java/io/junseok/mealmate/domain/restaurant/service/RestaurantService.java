@@ -4,6 +4,7 @@ import io.junseok.mealmate.domain.restaurant.dto.request.RestaurantRegister;
 import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantDetailInfo;
 import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo;
 import io.junseok.mealmate.domain.restaurant.entity.Restaurant;
+import io.junseok.mealmate.domain.restaurant.repository.QueryRestaurantRepository;
 import io.junseok.mealmate.domain.restaurant.repository.RestaurantRepository;
 import io.junseok.mealmate.domain.restaurantmenu.dto.response.MenuInfo;
 import io.junseok.mealmate.domain.restaurantmenu.repository.RestaurantMenuRepository;
@@ -25,6 +26,7 @@ public class RestaurantService {
     private static final Double INITIAL_GRADE=0.0;
     private final RestaurantRepository restaurantRepository;
     private final RestaurantMenuRepository restaurantMenuRepository;
+    private final QueryRestaurantRepository queryRestaurantRepository;
     private final S3UploadImage s3UploadImage;
 
     @Transactional
@@ -57,7 +59,7 @@ public class RestaurantService {
 
     @Transactional(readOnly = true)
     public List<RestaurantInfo> findRestaurants(String restaurantType) {
-        return restaurantRepository.findAllByRestaurantType(restaurantType)
+        return queryRestaurantRepository.findAllRestaurant(restaurantType)
             .stream()
             .map(RestaurantInfo::fromEntity)
             .toList();
