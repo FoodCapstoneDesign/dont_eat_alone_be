@@ -33,4 +33,8 @@ public class MemberCategory {
     @JoinColumn(name = "member_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    public void modifyCategoryName(String categoryName){
+        this.categoryName=categoryName;
+    }
 }

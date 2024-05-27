@@ -38,4 +38,8 @@ public class Member extends BaseTimeEntity {
 
     @Enumerated(STRING)
     private Authority authority;
+
+    public void updatePassword(String password){
+        this.password=password;
+    }
 }

@@ -28,4 +28,30 @@ public class MemberCategoryService {
         }
         memberCategoryRepository.saveAll(memberCategories);
     }
+
+    @Transactional
+    public void updateMemberCategory(List<CategoryRegister> categoryRegisters,Member member){
+        List<MemberCategory> memberCategoryList = memberCategoryRepository.findAllByMember(member);
+
+        for (int i = 0; i <categoryRegisters.size(); i++) {
+            CategoryRegister categoryRegister = categoryRegisters.get(i);
+
+            if(memberCategoryList.size()>i){
+                memberCategoryList.get(i).modifyCategoryName(categoryRegister.categoryName());
+            }else {
+                MemberCategory category = MemberCategory.builder()
+                    .member(member)
+                    .categoryName(categoryRegisters.get(i).categoryName())
+                    .build();
+                memberCategoryRepository.save(category);
+            }
+
+        }
+
+        if(memberCategoryList.size() > categoryRegisters.size()){
+            List<MemberCategory> memberCategories = memberCategoryList.subList(
+                categoryRegisters.size(), memberCategoryList.size());
+            memberCategoryRepository.deleteAll(memberCategories);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package io.junseok.mealmate.domain.member.service;
 
 import static io.junseok.mealmate.exception.ErrorCode.INVALID_EMAIL_FORMAT;
 
+import io.junseok.mealmate.domain.member.dto.request.ModifyMemberInfo;
 import io.junseok.mealmate.domain.member.dto.request.SignUpDto;
 import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto;
 import io.junseok.mealmate.domain.member.entity.Authority;
@@ -63,5 +64,13 @@ public class MemberService {
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             throw new MealMateException(INVALID_EMAIL_FORMAT);
         }
+    }
+
+    @Transactional
+    public void update(ModifyMemberInfo modifyMemberInfo, String email) {
+        Member member = getMember(email);
+        String encodePassword = encoder.encode(modifyMemberInfo.password());
+        member.updatePassword(encodePassword);
+        memberCategoryService.updateMemberCategory(modifyMemberInfo.categoryRegisters(),member);
     }
 }
