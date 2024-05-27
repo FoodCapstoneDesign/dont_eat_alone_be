@@ -7,6 +7,7 @@ import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto;
 import io.junseok.mealmate.domain.member.entity.Authority;
 import io.junseok.mealmate.domain.member.entity.Member;
 import io.junseok.mealmate.domain.member.repository.MemberRepository;
+import io.junseok.mealmate.domain.membercategory.service.MemberCategoryService;
 import io.junseok.mealmate.exception.ErrorCode;
 import io.junseok.mealmate.exception.MealMateException;
 import java.util.regex.Pattern;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final MemberCategoryService memberCategoryService;
     private final PasswordEncoder encoder;
     private static final Pattern EMAIL_PATTERN =
         Pattern.compile("^[a-zA-Z0-9._%+-]{2,}+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
@@ -32,6 +34,7 @@ public class MemberService {
             .authority(Authority.ROLE_USER)
             .build();
 
+        memberCategoryService.saveCategory(signUpDto.categoryRegisters(),member);
         return memberRepository.save(member).getMemberId();
     }
 
