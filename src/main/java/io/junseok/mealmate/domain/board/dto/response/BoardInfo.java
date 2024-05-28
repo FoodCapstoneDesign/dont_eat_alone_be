@@ -10,7 +10,8 @@ public record BoardInfo(
     String content,
     String email,
     LocalDateTime lastTime,
-    LocalDateTime modifyDt) {
+    LocalDateTime modifyDt,
+    long boardId) {
     public static BoardInfo fromEntity(Board board){
         return BoardInfo.builder()
             .title(board.getTitle())
@@ -18,6 +19,7 @@ public record BoardInfo(
             .email(board.getMember().getEmail())
             .lastTime(board.createDt)
             .modifyDt(board.modifyDt)
+            .boardId(board.getBoardId())
             .build();
     }
 }
