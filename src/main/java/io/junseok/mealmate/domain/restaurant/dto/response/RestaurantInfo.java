@@ -8,7 +8,8 @@ public record RestaurantInfo(
     String restaurantName,
     String restaurantImageUrl,
     String restaurantType,
-    int likeCount) {
+    int likeCount,
+    long restaurantId) {
 
     public static RestaurantInfo fromEntity(Restaurant restaurant){
         return RestaurantInfo.builder()
@@ -16,6 +17,7 @@ public record RestaurantInfo(
             .restaurantImageUrl(restaurant.getRestaurantImageUrl())
             .restaurantType(restaurant.getRestaurantType())
             .likeCount(restaurant.getLikeCount())
+            .restaurantId(restaurant.getRestaurantId())
             .build();
     }
 }
