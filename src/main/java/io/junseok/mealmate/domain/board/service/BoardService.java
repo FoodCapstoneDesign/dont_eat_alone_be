@@ -32,7 +32,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public List<BoardInfo> showBoardList() {
-        return boardRepository.findAllByOrderByCreateDt().stream()
+        return boardRepository.findAllByOrderByCreateDtDesc().stream()
             .map(BoardInfo::fromEntity)
             .toList();
     }
