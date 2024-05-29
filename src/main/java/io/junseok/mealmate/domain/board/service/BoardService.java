@@ -58,6 +58,7 @@ public class BoardService {
         Board board = findBoard(boardId);
         return BoardInfo.builder()
             .title(board.getTitle())
+            .email(board.getMember().getEmail())
             .content(board.getContent())
             .lastTime(board.createDt)
             .modifyDt(board.modifyDt)
