@@ -12,6 +12,8 @@ public enum ErrorCode {
     NOT_EXIST_ADMIN(HttpStatusCode.BAD_REQUEST.getStatus(), "존재하지 않는 관리자입니다!"),
     NOT_EXIST_BOARD(HttpStatusCode.BAD_REQUEST.getStatus(), "존재하지 않는 게시판입니다!"),
     NOT_EXIST_WISHLIST(HttpStatusCode.BAD_REQUEST.getStatus(), "존재하지 않는 찜한 게시판입니다!"),
+    NOT_EXIST_COMMENT(HttpStatusCode.BAD_REQUEST.getStatus(), "존재하지 않는 댓글입니다!"),
+    NOT_WRITE_MEMBER(HttpStatusCode.BAD_REQUEST.getStatus(),"댓글을 작성한 사용자가 아닙니다!"),
 
     NOT_EXIST_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.getStatus(), "Security Context에 인증 정보가 없습니다!"),
     NOT_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.getStatus(), "게시판 삭제 권한이 없습니다!"),
