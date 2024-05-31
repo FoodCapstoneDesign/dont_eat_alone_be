@@ -8,6 +8,7 @@ import lombok.Builder;
 public record CommentInfo(
     String commentContent,
     String email,
+    long commentId,
     LocalDateTime createDt,
     LocalDateTime modifyDt
 ) {
@@ -15,8 +16,10 @@ public record CommentInfo(
         return CommentInfo.builder()
             .commentContent(comment.getCommentContent())
             .email(comment.getMember().getEmail())
+            .commentId(comment.getCommentId())
             .createDt(comment.getCreateDt())
             .modifyDt(comment.getModifyDt())
             .build();
     }
 }
+
