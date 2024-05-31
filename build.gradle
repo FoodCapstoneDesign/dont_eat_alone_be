@@ -24,10 +24,6 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 	//jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -38,12 +34,15 @@ dependencies {
 	runtimeOnly  group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	//etc
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	annotationProcessor 'org.projectlombok:lombok'
 
 	//mysql
 	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -60,6 +59,10 @@ dependencies {
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 }
+repositories {
+	mavenCentral()
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
