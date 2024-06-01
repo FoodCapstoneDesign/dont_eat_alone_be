@@ -7,10 +7,8 @@ import io.junseok.mealmate.domain.member.dto.request.SignUpDto;
 import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto;
 import io.junseok.mealmate.domain.member.service.MemberService;
 import java.security.Principal;
-import java.util.concurrent.locks.ReentrantLock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.converter.RsaKeyConverters;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +50,8 @@ public class MemberController {
     @PatchMapping
     public ResponseEntity<Void> updateMemberInfo(
         @RequestBody ModifyMemberInfo modifyMemberInfo,
-        Principal principal){
+        Principal principal
+    ){
         memberService.update(modifyMemberInfo,principal.getName());
         return ResponseEntity.ok().build();
     }
