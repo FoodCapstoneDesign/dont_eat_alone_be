@@ -15,7 +15,7 @@ plugins {
 
 checkstyle {
 	toolVersion = '8.45' // 사용하고 싶은 Checkstyle 버전
-	configFile = file('checkstyle.xml') // 위에서 만든 파일 경로
+	configFile = file("$projectDir/checkstyle.xml")
 }
 
 
