@@ -1,14 +1,10 @@
 package io.junseok.mealmate.domain.memberwish.service;
 
-import io.junseok.mealmate.domain.board.dto.response.BoardInfo;
-import io.junseok.mealmate.domain.board.entity.Board;
-import io.junseok.mealmate.domain.board.service.BoardService;
 import io.junseok.mealmate.domain.member.entity.Member;
 import io.junseok.mealmate.domain.member.service.MemberService;
 import io.junseok.mealmate.domain.memberwish.dto.response.MemberWishList;
 import io.junseok.mealmate.domain.memberwish.entity.MemberWish;
 import io.junseok.mealmate.domain.memberwish.repository.WishRepository;
-import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantDetailInfo;
 import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo;
 import io.junseok.mealmate.domain.restaurant.entity.Restaurant;
 import io.junseok.mealmate.domain.restaurant.service.RestaurantService;
