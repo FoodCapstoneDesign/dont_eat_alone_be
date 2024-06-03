@@ -9,7 +9,7 @@ permissions: write-all
 
 jobs:
   build:
-    needs: style
+    #needs: style
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
