@@ -94,4 +94,9 @@ public class RestaurantService {
             .menuList(menuInfoList)
             .build();
     }
+
+    public Restaurant findByRestaurantId(Long restaurantId){
+        return restaurantRepository.findById(restaurantId)
+            .orElseThrow(() -> new MealMateException(ErrorCode.NOT_EXIST_RESTAURANT));
+    }
 }

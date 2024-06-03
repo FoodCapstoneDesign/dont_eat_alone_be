@@ -2,6 +2,7 @@ package io.junseok.mealmate.domain.memberwish.entity;
 
 import io.junseok.mealmate.domain.board.entity.Board;
 import io.junseok.mealmate.domain.member.entity.Member;
+import io.junseok.mealmate.domain.restaurant.entity.Restaurant;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +34,6 @@ public class MemberWish {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id")
-    private Board board;
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }

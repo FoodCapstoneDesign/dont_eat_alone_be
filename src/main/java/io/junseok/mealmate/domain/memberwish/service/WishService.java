@@ -8,6 +8,10 @@ import io.junseok.mealmate.domain.member.service.MemberService;
 import io.junseok.mealmate.domain.memberwish.dto.response.MemberWishList;
 import io.junseok.mealmate.domain.memberwish.entity.MemberWish;
 import io.junseok.mealmate.domain.memberwish.repository.WishRepository;
+import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantDetailInfo;
+import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo;
+import io.junseok.mealmate.domain.restaurant.entity.Restaurant;
+import io.junseok.mealmate.domain.restaurant.service.RestaurantService;
 import io.junseok.mealmate.exception.ErrorCode;
 import io.junseok.mealmate.exception.MealMateException;
 import java.util.List;
@@ -21,19 +25,18 @@ public class WishService {
 
     private final WishRepository wishRepository;
     private final MemberService memberService;
-    private final BoardService boardService;
-
+    private final RestaurantService restaurantService;
     @Transactional
-    public Long createWishList(Long boardId, String email) {
+    public Long createWishList(Long restaurantId, String email) {
         Member member = memberService.getMember(email);
-        Board board = boardService.findBoard(boardId);
+        Restaurant restaurant = restaurantService.findByRestaurantId(restaurantId);
 
-        if (wishRepository.existsByBoardAndMember(board, member)) {
+        if (wishRepository.existsByRestaurantAndMember(restaurant, member)) {
             throw new MealMateException(ErrorCode.EXIST_WISHLIST);
         }
 
         MemberWish memberWish = MemberWish.builder()
-            .board(board)
+            .restaurant(restaurant)
             .member(member)
             .build();
         return wishRepository.save(memberWish).getMemberWishId();
@@ -42,20 +45,13 @@ public class WishService {
     @Transactional
     public MemberWishList getWishList(String email) {
         Member member = memberService.getMember(email);
-        List<BoardInfo> infoList = wishRepository.findAllByMember(member)
+        List<RestaurantInfo> infoList = wishRepository.findAllByMember(member)
             .stream()
-            .map(wishList -> BoardInfo.builder()
-                .title(wishList.getBoard().getTitle())
-                .content(wishList.getBoard().getContent())
-                .email(wishList.getMember().getEmail())
-                .lastTime(wishList.getBoard().getCreateDt())
-                .modifyDt(wishList.getBoard().getModifyDt())
-                .build()
-            )
+            .map(MemberWishList::fromRestaurantInfo)
             .toList();
 
         return MemberWishList.builder()
-            .boardInfo(infoList)
+            .restaurantInfoList(infoList)
             .build();
     }
 

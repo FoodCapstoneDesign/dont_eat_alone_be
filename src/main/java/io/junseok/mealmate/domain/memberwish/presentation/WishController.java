@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class WishController {
     private final WishService wishService;
 
-    @GetMapping("/{boardId}")
-    public ResponseEntity<Long> saveWishList(@PathVariable Long boardId, Principal principal){
-        return ResponseEntity.ok(wishService.createWishList(boardId,principal.getName()));
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<Long> saveWishList(@PathVariable Long restaurantId, Principal principal){
+        return ResponseEntity.ok(wishService.createWishList(restaurantId,principal.getName()));
     }
 
     @GetMapping
