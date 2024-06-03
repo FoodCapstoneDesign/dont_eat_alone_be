@@ -44,8 +44,8 @@ public class BoardController {
      * @return
      */
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardInfo> findBoard(@PathVariable Long boardId){
-        return ResponseEntity.ok(boardService.getBoard(boardId));
+    public ResponseEntity<BoardInfo> findBoard(@PathVariable Long boardId,Principal principal){
+        return ResponseEntity.ok(boardService.getBoard(boardId,principal.getName()));
     }
 
     @DeleteMapping("/{boardId}")

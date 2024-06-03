@@ -54,14 +54,23 @@ public class BoardService {
             .orElseThrow(() -> new MealMateException(ErrorCode.NOT_EXIST_BOARD));
     }
 
-    public BoardInfo getBoard(Long boardId) {
+    public BoardInfo getBoard(Long boardId, String email) {
         Board board = findBoard(boardId);
+        Member member = memberService.getMember(email);
+        if(board.getMember().getMemberId().equals(member.getMemberId())){
+            return getBoardInfo(board, true);
+        }
+        return getBoardInfo(board, false);
+    }
+
+    private static BoardInfo getBoardInfo(Board board, boolean isWriter) {
         return BoardInfo.builder()
             .title(board.getTitle())
             .email(board.getMember().getEmail())
             .content(board.getContent())
             .lastTime(board.createDt)
             .modifyDt(board.modifyDt)
+            .isWriter(isWriter)
             .build();
     }
 }

@@ -11,7 +11,9 @@ public record BoardInfo(
     String email,
     LocalDateTime lastTime,
     LocalDateTime modifyDt,
-    long boardId) {
+    long boardId,
+    boolean isWriter
+) {
     public static BoardInfo fromEntity(Board board){
         return BoardInfo.builder()
             .title(board.getTitle())
