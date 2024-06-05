@@ -29,9 +29,9 @@ public class WishController {
         return ResponseEntity.ok(wishService.getWishList(principal.getName()));
     }
 
-    @DeleteMapping("/{wishListId}")
-    public ResponseEntity<Void> deleteWishList(@PathVariable Long wishListId){
-        wishService.remove(wishListId);
+    @DeleteMapping("/{restaurantId}")
+    public ResponseEntity<Void> deleteWishList(@PathVariable Long restaurantId,Principal principal){
+        wishService.remove(restaurantId,principal.getName());
         return ResponseEntity.ok().build();
     }
 

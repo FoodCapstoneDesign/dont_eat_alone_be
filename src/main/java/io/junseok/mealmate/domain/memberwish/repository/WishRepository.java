@@ -11,4 +11,6 @@ public interface WishRepository extends JpaRepository<MemberWish,Long> {
     List<MemberWish> findAllByMember(Member member);
 
     Integer countByMember(Member member);
+
+    void deleteByRestaurantAndMember(Restaurant restaurant,Member member);
 }

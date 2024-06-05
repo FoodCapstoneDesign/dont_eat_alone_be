@@ -52,12 +52,14 @@ public class WishService {
     }
 
     @Transactional
-    public void remove(Long wishListId) {
-        if(wishRepository.existsById(wishListId)){
+    public void remove(Long restaurantId,String email) {
+        Member member = memberService.getMember(email);
+        Restaurant restaurant = restaurantService.findByRestaurantId(restaurantId);
+        if(wishRepository.existsByRestaurantAndMember(restaurant,member)){
             throw new MealMateException(ErrorCode.NOT_EXIST_WISHLIST);
         }
 
-        wishRepository.deleteById(wishListId);
+        wishRepository.deleteByRestaurantAndMember(restaurant,member);
     }
 
     @Transactional(readOnly = true)

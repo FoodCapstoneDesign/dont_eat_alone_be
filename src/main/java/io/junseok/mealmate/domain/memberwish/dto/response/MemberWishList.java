@@ -2,6 +2,7 @@ package io.junseok.mealmate.domain.memberwish.dto.response;
 
 import io.junseok.mealmate.domain.memberwish.entity.MemberWish;
 import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.Builder;
 
