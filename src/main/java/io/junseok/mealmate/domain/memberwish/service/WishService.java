@@ -55,7 +55,7 @@ public class WishService {
     public void remove(Long restaurantId,String email) {
         Member member = memberService.getMember(email);
         Restaurant restaurant = restaurantService.findByRestaurantId(restaurantId);
-        if(wishRepository.existsByRestaurantAndMember(restaurant,member)){
+        if(!wishRepository.existsByRestaurantAndMember(restaurant,member)){
             throw new MealMateException(ErrorCode.NOT_EXIST_WISHLIST);
         }
 
