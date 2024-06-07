@@ -41,11 +41,10 @@ public class BoardController {
     /**
      * NOTE
      * 단일 게시판 조회
-     * @return
      */
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardInfo> findBoard(@PathVariable Long boardId,Principal principal){
-        return ResponseEntity.ok(boardService.getBoard(boardId,principal.getName()));
+    public ResponseEntity<BoardInfo> findBoard(@PathVariable Long boardId){
+        return ResponseEntity.ok(boardService.getBoard(boardId));
     }
 
     @DeleteMapping("/{boardId}")
