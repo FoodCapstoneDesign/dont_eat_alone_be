@@ -5,6 +5,7 @@ import io.junseok.mealmate.auth.dto.TokenDto;
 import io.junseok.mealmate.auth.service.LoginAuthService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletRegistrationBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
