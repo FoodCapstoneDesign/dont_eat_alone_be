@@ -3,16 +3,13 @@ package io.junseok.mealmate.domain.restaurantmenu.dto.response;
 import io.junseok.mealmate.domain.restaurantmenu.entity.RestaurantMenu;
 import lombok.Builder;
 
-@Builder
-public record MenuInfo(
-    String menuName,
-    String menuPrice
-    ) {
+data class MenuInfo(
+    val menuName: String,
+    val menuPrice: String
+)
 
-    public static MenuInfo fromEntity(RestaurantMenu restaurantMenu){
-        return MenuInfo.builder()
-            .menuName(restaurantMenu.getMenuName())
-            .menuPrice(restaurantMenu.getMenuPrice())
-            .build();
-    }
-}
+fun RestaurantMenu.toCreateMenuInfo() = MenuInfo(
+    menuName = this.menuName,
+    menuPrice = this.menuPrice
+)
+
