@@ -53,6 +53,8 @@ dependencies {
     kapt("org.projectlombok:lombok")
     implementation ("org.springframework.boot:spring-boot-starter-validation")
 
+    implementation("org.jetbrains.kotlin:kotlin-reflect") // blog
+
     //mysql
     runtimeOnly ("com.mysql:mysql-connector-j")
 
