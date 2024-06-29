@@ -1,6 +1,6 @@
 package io.junseok.mealmate.domain.member.entity;
 
-public enum Authority {
+enum class Authority {
     ROLE_USER,
-    ROLE_ADMIN;
+    ROLE_ADMIN
 }

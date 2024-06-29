@@ -1,11 +1,11 @@
-package io.junseok.mealmate.exception;
+package io.junseok.mealmate.exception
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.AllArgsConstructor
+import lombok.Getter
 
 @AllArgsConstructor
 @Getter
-public enum HttpStatusCode {
+enum class HttpStatusCode(val status:Int) {
     CREATED(201),
     OK(200),
     CONFLICT(409),
@@ -14,5 +14,5 @@ public enum HttpStatusCode {
     CONTAIN_BADWORD(451),
     NOT_FOUND_MESSAGE(406);
 
-    private final int status;
+
 }

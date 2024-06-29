@@ -43,7 +43,7 @@ class MemberController(
         @RequestBody modifyMemberInfo: ModifyMemberInfo,
         principal: Principal
         ): ResponseEntity<Unit> {
-        memberService.update(modifyMemberInfo,principal.name);
+        memberService.update(modifyMemberInfo,principal.name)
         return ResponseEntity.ok().build();
     }
 }

@@ -131,7 +131,7 @@ class MemberServiceTest {
         ModifyMemberInfo memberInfo = new ModifyMemberInfo("0000",list); //수정 내용
 
         when(memberRepository.findByEmail(member1.getEmail())).thenReturn(Optional.of(member1));
-        when(encoder.encode(memberInfo.password())).thenReturn("0000");
+        when(encoder.encode(memberInfo.password)).thenReturn("0000");
 
         //when
         memberService.update(memberInfo,member1.getEmail());

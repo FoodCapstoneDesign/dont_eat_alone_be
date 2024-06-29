@@ -2,6 +2,7 @@ package io.junseok.mealmate.domain.member.service
 
 import io.junseok.mealmate.domain.member.dto.request.ModifyMemberInfo
 import io.junseok.mealmate.domain.member.dto.request.SignUpDto
+import io.junseok.mealmate.domain.member.dto.request.toCategoryRegisters
 import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto
 import io.junseok.mealmate.domain.member.entity.Authority
 import io.junseok.mealmate.domain.member.entity.Member
@@ -28,7 +29,8 @@ class MemberService(
             activated = true,
             authority = Authority.ROLE_USER
         )
-        memberCategoryService.saveCategory(signUpDto.categoryRegisters, member)
+
+        memberCategoryService.saveCategory(signUpDto.categoryRegisters.toCategoryRegisters(), member)
         return memberRepository.save(member).memberId
     }
 

@@ -23,9 +23,10 @@ class Member(
 
     @Enumerated(EnumType.STRING)
     val authority: Authority
-) : BaseTimeEntity(){
+) : BaseTimeEntity() {
+
 
     fun updatePassword(password: String): Unit {
-        this.password = password;
+        this.password = password
     }
 }

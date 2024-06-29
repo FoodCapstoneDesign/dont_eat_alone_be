@@ -138,11 +138,11 @@ class MemberControllerTest {
         EmailCheck emailCheck1 = new EmailCheck("wnstjrnaver.com");
         //when
         //유효한 이메일
-        doNothing().when(memberService).validEmail(emailCheck1.email());
+        doNothing().when(memberService).validEmail(emailCheck1.email);
 
         //유효하지 않은 이메일인 경우
         doThrow(new MealMateException(ErrorCode.INVALID_EMAIL_FORMAT))
-            .when(memberService).validEmail(emailCheck1.email());
+            .when(memberService).validEmail(emailCheck1.email);
         //then
         mockMvc.perform(post("/api/member/check-email")
                 .with(SecurityMockMvcRequestPostProcessors.csrf())
