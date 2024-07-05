@@ -4,6 +4,7 @@ plugins {
     val dependencyVersion = "1.1.4"
     val lombokVersion = "8.1.0"
 
+
     id("org.springframework.boot") version springBootVersion
     id("io.spring.dependency-management") version dependencyVersion
 
@@ -28,7 +29,8 @@ repositories {
 }
 
 dependencies {
-
+    val mockkVersion = "1.13.8"
+    val kotestVersion = "5.8.0"
     //query dsl
     val querydslVersion = "5.0.0"
     implementation("com.querydsl:querydsl-jpa:$querydslVersion")
@@ -46,6 +48,8 @@ dependencies {
     //test
     testImplementation ("org.springframework.boot:spring-boot-starter-test")
     testImplementation ("org.springframework.security:spring-security-test")
+    testImplementation("io.mockk:mockk:${mockkVersion}")
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 
     //etc
     implementation ("org.springframework.boot:spring-boot-starter-web")
