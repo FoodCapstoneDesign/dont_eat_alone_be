@@ -32,6 +32,23 @@ services:
       - mealmate-network
     restart: always
 
+  app-blue:
+    image: junseok1204/mealmate-0.0.1-snapshot
+    container_name: app-container
+    ports:
+      - 8090:8080
+    env_file:
+      - "./.env"
+    environment:
+      - TZ=Asis/Seoul
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - mealmate-network
+    restart: always
+
   nginx:
     image: nginx:1.15-alpine
     restart: unless-stopped

@@ -21,10 +21,10 @@ class BoardController(
     ): ResponseEntity<Long> =
         ResponseEntity.ok(boardService.createBoard(boardCreate, principal.name))
 
-        /**
-         * NOTE
-         * 게시판 목록 조회
-         */
+    /**
+     * NOTE
+     * 게시판 목록 조회
+     */
     @GetMapping
     fun boardList(): ResponseEntity<List<BoardInfo>> =
         ResponseEntity.ok(boardService.showBoardList())

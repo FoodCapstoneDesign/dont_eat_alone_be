@@ -82,10 +82,7 @@ jobs:
           port: ${{ secrets.AWS_PORT }}
           script: |
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-            sudo docker stop ${{ secrets.DOCKER_APP_CONTAINER }}
-            sudo docker rm ${{ secrets.DOCKER_APP_CONTAINER }}
-            sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/mealmate-0.0.1-snapshot
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/mealmate-0.0.1-snapshot
             cd dont_eat_alone_be
-            git pull origin ${{ needs.env.outputs.branch }}
-            sudo docker-compose up -d
+            chmod 777 ./deploy.sh
+            ./deploy.sh
+            sudo docker image prune -f

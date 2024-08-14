@@ -66,12 +66,14 @@ dependencies {
     runtimeOnly ("com.mysql:mysql-connector-j")
 
     //swagger
-	implementation("io.springfox:springfox-swagger-ui:2.9.2")
-	implementation("io.springfox:springfox-swagger2:2.9.2")
+    implementation ("org.springdoc:springdoc-openapi-ui:1.7.0")
 
-	// s3
+
+    // s3
 	implementation("com.amazonaws:aws-java-sdk-s3:1.12.624")
 	implementation("com.slack.api:slack-api-client:1.29.0")
+
+    implementation ("org.springframework.boot:spring-boot-starter-actuator")
 
 }
 
