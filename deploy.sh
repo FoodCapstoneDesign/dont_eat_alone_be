@@ -1,14 +1,16 @@
-sudo docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
-IS_GREEN=$(sudo docker ps | grep app-container-green) # 현재 실행 중인 App이 green인지 확인합니다.
+#!/bin/bash
 
-if [ -z "$IS_GREEN" ]; then # green 컨테이너가 실행 중이지 않다면
+# 현재 실행 중인 Green 컨테이너 확인
+IS_GREEN=$(sudo docker ps | grep app-container-green)
+
+if [ -z "$IS_GREEN" ]; then
   echo "### Switching from BLUE to GREEN ###"
 
   echo "1. Pulling green image"
-  sudo docker-compose pull app # green 이미지 내려받기
+  sudo docker-compose pull app  # green 이미지 다운로드
 
   echo "2. Starting green container"
-  sudo docker-compose up -d app # green 컨테이너 실행
+  sudo docker-compose up -d app  # green 컨테이너 실행
 
   echo "3. Health check for green..."
   while ! curl -s http://172.17.0.1:8080; do
@@ -33,7 +35,7 @@ else
 
   echo "3. Health check for blue..."
   while ! curl -s http://172.17.0.1:8090; do
-    sudo sleep 3
+    sleep 3
     echo "Waiting for blue to be ready..."
   done
 
