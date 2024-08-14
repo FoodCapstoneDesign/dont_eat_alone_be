@@ -7,10 +7,10 @@ if [ -z "$IS_GREEN" ]; then
   echo "### Switching from BLUE to GREEN ###"
 
   echo "1. Pulling green image"
-  sudo docker-compose pull app  # green 이미지 다운로드
+  sudo docker-compose pull app
 
   echo "2. Starting green container"
-  sudo docker-compose up -d app  # green 컨테이너 실행
+  sudo docker-compose up -d app
 
   echo "3. Health check for green..."
   while ! curl -s http://172.17.0.1:8080; do
@@ -19,7 +19,8 @@ if [ -z "$IS_GREEN" ]; then
   done
 
   echo "4. Switching Nginx to use green"
-  sudo cp ./nginx/config/app.conf ./nginx/config/app.green.conf
+  sudo rm /etc/nginx/conf.d/app.blue.conf
+  sudo ln -s /etc/nginx/conf.d/app.green.conf /etc/nginx/conf.d/app.conf
   sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping blue container"
@@ -40,7 +41,8 @@ else
   done
 
   echo "4. Switching Nginx to use blue"
-  sudo cp ./nginx/config/app.blue.conf ./nginx/config/app.conf
+  sudo rm /etc/nginx/conf.d/app.green.conf
+  sudo ln -s /etc/nginx/conf.d/app.blue.conf /etc/nginx/conf.d/app.conf
   sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping green container"
