@@ -19,7 +19,7 @@ if [ -z "$IS_GREEN" ]; then
   done
 
   echo "4. Switching Nginx to use green"
-  sudo ln -sf /etc/nginx/conf.d/app.green.conf /etc/nginx/conf.d/app.conf
+  sudo docker exec mealmate-nginx ln -sf /etc/nginx/conf.d/app.green.conf /etc/nginx/conf.d/app.conf
   sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping blue container"
@@ -40,7 +40,7 @@ else
   done
 
   echo "4. Switching Nginx to use blue"
-  sudo ln -sf /etc/nginx/conf.d/app.blue.conf /etc/nginx/conf.d/app.conf
+  sudo docker exec mealmate-nginx ln -sf /etc/nginx/conf.d/app.blue.conf /etc/nginx/conf.d/app.conf
   sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping green container"
