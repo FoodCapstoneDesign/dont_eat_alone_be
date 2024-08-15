@@ -13,17 +13,25 @@ if [ -z "$IS_GREEN" ]; then
   sudo docker-compose up -d app
 
   echo "3. Health check for green..."
-  while ! curl -s http://172.17.0.1:8080; do
+  for i in {1..30}; do
+    if curl -s http://172.17.0.1:8080 > /dev/null; then
+      echo "Green is ready!"
+      break
+    fi
+    if [ $i -eq 30 ]; then
+      echo "Green failed to start. Aborting..."
+      exit 1
+    fi
     sleep 3
-    echo "Waiting for green to be ready..."
+    echo "Waiting for green to be ready... (Attempt $i/30)"
   done
 
   echo "4. Switching Nginx to use green"
-  sudo docker exec mealmate-nginx ln -sf /etc/nginx/conf.d/app.green.conf /etc/nginx/conf.d/app.conf
-  sudo docker exec mealmate-nginx nginx -s reload
+  sudo docker exec mealmate-nginx sh -c "ln -sf /etc/nginx/conf.d/app.green.conf /etc/nginx/conf.d/app.conf && nginx -s reload"
 
   echo "5. Stopping blue container"
   sudo docker-compose stop app-blue
+
 else
   echo "### Switching from GREEN to BLUE ###"
 
@@ -34,15 +42,24 @@ else
   sudo docker-compose up -d app-blue
 
   echo "3. Health check for blue..."
-  while ! curl -s http://172.17.0.1:8090; do
+  for i in {1..30}; do
+    if curl -s http://172.17.0.1:8090 > /dev/null; then
+      echo "Blue is ready!"
+      break
+    fi
+    if [ $i -eq 30 ]; then
+      echo "Blue failed to start. Aborting..."
+      exit 1
+    fi
     sleep 3
-    echo "Waiting for blue to be ready..."
+    echo "Waiting for blue to be ready... (Attempt $i/30)"
   done
 
   echo "4. Switching Nginx to use blue"
-  sudo docker exec mealmate-nginx ln -sf /etc/nginx/conf.d/app.blue.conf /etc/nginx/conf.d/app.conf
-  sudo docker exec mealmate-nginx nginx -s reload
+  sudo docker exec mealmate-nginx sh -c "ln -sf /etc/nginx/conf.d/app.blue.conf /etc/nginx/conf.d/app.conf && nginx -s reload"
 
   echo "5. Stopping green container"
   sudo docker-compose stop app
 fi
+
+echo "Deployment completed successfully!"
