@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 현재 실행 중인 Green 컨테이너 확인
-IS_GREEN=$(sudo docker ps | grep app-container-green)
+IS_GREEN=$(sudo docker ps | grep app-container)
 
 if [ -z "$IS_GREEN" ]; then
   echo "### Switching from BLUE to GREEN ###"
@@ -30,16 +30,16 @@ if [ -z "$IS_GREEN" ]; then
   sudo docker exec mealmate-nginx sh -c "sed -i 's/backend_blue/backend_green/' /etc/nginx/conf.d/app.conf && nginx -s reload"
 
   echo "5. Stopping blue container"
-  sudo docker-compose stop app-blue
+  sudo docker-compose stop app-container-b
 
 else
   echo "### Switching from GREEN to BLUE ###"
 
   echo "1. Pulling blue image"
-  sudo docker-compose pull app-blue
+  sudo docker-compose pull app-container-b
 
   echo "2. Starting blue container"
-  sudo docker-compose up -d app-blue
+  sudo docker-compose up -d app-container-b
 
   echo "3. Health check for blue..."
   for i in {1..30}; do
