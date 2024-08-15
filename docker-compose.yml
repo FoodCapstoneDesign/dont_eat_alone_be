@@ -34,7 +34,7 @@ services:
 
   app-blue:
     image: junseok1204/mealmate-0.0.1-snapshot
-    container_name: app-container
+    container_name: app-container-b
     ports:
       - 8090:8080
     env_file:
