@@ -26,8 +26,8 @@ if [ -z "$IS_GREEN" ]; then
     echo "Waiting for green to be ready... (Attempt $i/30)"
   done
 
-  echo "4. Switching Nginx to use green"
-  sudo docker exec mealmate-nginx sh -c "ln -sf /etc/nginx/conf.d/app.green.conf /etc/nginx/conf.d/app.conf && nginx -s reload"
+  echo "4. Reloading Nginx to use green"
+  sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping blue container"
   sudo docker-compose stop app-blue
@@ -55,8 +55,8 @@ else
     echo "Waiting for blue to be ready... (Attempt $i/30)"
   done
 
-  echo "4. Switching Nginx to use blue"
-  sudo docker exec mealmate-nginx sh -c "ln -sf /etc/nginx/conf.d/app.blue.conf /etc/nginx/conf.d/app.conf && nginx -s reload"
+  echo "4. Reloading Nginx to use blue"
+  sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping green container"
   sudo docker-compose stop app
