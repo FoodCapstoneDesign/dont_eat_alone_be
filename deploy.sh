@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DEFAULT_CONF="/etc/nginx/nginx.conf"
+GREEN_CONF="/etc/nginx/nginx.green.conf"
+BLUE_CONF="/etc/nginx/nginx.blue.conf"
+
 # 현재 실행 중인 Green 컨테이너 확인
 IS_GREEN=$(sudo docker ps | grep app-container)
 
@@ -27,7 +31,8 @@ if [ -z "$IS_GREEN" ]; then
   done
 
   echo "4. Switching Nginx to use green"
-  sudo docker exec mealmate-nginx sh -c "sed -i 's/backend_blue/backend_green/' /etc/nginx/conf.d/app.conf && nginx -s reload"
+  sudo cp $GREEN_CONF $DEFAULT_CONF
+  sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping blue container"
   sudo docker-compose stop app-container-b
@@ -56,7 +61,8 @@ else
   done
 
   echo "4. Switching Nginx to use blue"
-  sudo docker exec mealmate-nginx sh -c "sed -i 's/backend_green/backend_blue/' /etc/nginx/conf.d/app.conf && nginx -s reload"
+  sudo cp $BLUE_CONF $DEFAULT_CONF
+  sudo docker exec mealmate-nginx nginx -s reload
 
   echo "5. Stopping green container"
   sudo docker-compose stop app
