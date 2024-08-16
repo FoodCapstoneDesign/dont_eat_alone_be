@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 현재 실행 중인 Green 컨테이너 확인
-IS_GREEN=$(sudo docker ps | grep app-container)
+IS_GREEN=$(sudo docker ps | grep -w app-container)
 
 if [ -n "$IS_GREEN" ]; then
   echo "### Switching from GREEN to BLUE ###"
