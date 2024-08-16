@@ -84,6 +84,6 @@ jobs:
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
             cd dont_eat_alone_be
             sudo git pull origin ${{ needs.env.outputs.branch }}
-            chmod 777 ./deploy.sh
-            ./deploy.sh
+            sudo chmod +x ./deploy.sh
+            sudo ./deploy.sh
             sudo docker image prune -f
