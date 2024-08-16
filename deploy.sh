@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # 현재 실행 중인 Green 컨테이너 확인
-IS_GREEN=$(sudo docker ps | grep -w app-container)
+IS_GREEN=$(sudo docker ps --filter "name=^app-container$" --format "{{.Names}}")
 
-if [ -n "$IS_GREEN" ]; then
+if [ "$IS_GREEN" == "app-container" ]; then
   echo "### Switching from GREEN to BLUE ###"
 
   echo "1. Pulling blue image"
