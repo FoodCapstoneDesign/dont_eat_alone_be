@@ -47,7 +47,7 @@ else
       echo "Blue is ready!"
       break
     fi
-    if [ $i -eq 30]; then
+    if [ $i -eq 30 ]; then
       echo "Blue failed to start. Aborting..."
       exit 1
     fi
