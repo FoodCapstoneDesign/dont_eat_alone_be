@@ -15,7 +15,7 @@ services:
     networks:
       - mealmate-network
 
-  app:
+  app-container:
     image: junseok1204/mealmate-0.0.1-snapshot
     container_name: app-container
     ports:
@@ -32,7 +32,7 @@ services:
       - mealmate-network
     restart: always
 
-  app-blue:
+  app-container-b:
     image: junseok1204/mealmate-0.0.1-snapshot
     container_name: app-container-b
     ports:
