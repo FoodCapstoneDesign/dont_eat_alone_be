@@ -7,10 +7,10 @@ if [ -z "$IS_GREEN" ]; then
   echo "### Switching from BLUE to GREEN ###"
 
   echo "1. Pulling green image"
-  sudo docker-compose pull app
+  sudo docker-compose pull app-container
 
   echo "2. Starting green container"
-  sudo docker-compose up -d app
+  sudo docker-compose up -d app-container
 
   echo "3. Health check for green..."
   for i in {1..30}; do
@@ -47,7 +47,7 @@ else
       echo "Blue is ready!"
       break
     fi
-    if [ $i -eq 30 ]; then
+    if [ $i -eq 30]; then
       echo "Blue failed to start. Aborting..."
       exit 1
     fi
@@ -59,7 +59,7 @@ else
   sudo docker exec mealmate-nginx sh -c "sed -i 's|proxy_pass http://backend_green;|proxy_pass http://backend_blue;|' /etc/nginx/conf.d/app.conf && nginx -s reload"
 
   echo "5. Stopping green container"
-  sudo docker-compose stop app
+  sudo docker-compose stop app-container
 fi
 
 echo "Deployment completed successfully!"
