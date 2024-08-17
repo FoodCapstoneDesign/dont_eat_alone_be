@@ -49,7 +49,7 @@ services:
       - mealmate-network
     restart: always
 
-  nginx:
+  mealmate-nginx:
     image: nginx:1.15-alpine
     restart: unless-stopped
     container_name: mealmate-nginx

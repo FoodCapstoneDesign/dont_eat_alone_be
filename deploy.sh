@@ -5,7 +5,7 @@ IS_CERTBOT_RUNNING=$(sudo docker inspect -f '{{.State.Running}}' dont_eat_alone_
 if [ "$IS_NGINX_RUNNING" == "true" ] && [ "$IS_CERTBOT_RUNNING" == "true" ]; then
   echo "Nginx and Certbot all Processing"
 else
-  sudo docker-compose up -d mealmate-nginx dont_eat_alone_be_certbot_1
+  sudo docker-compose up -d mealmate-nginx certbot
 fi
 
 
