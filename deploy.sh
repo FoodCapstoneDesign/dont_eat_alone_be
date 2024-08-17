@@ -1,13 +1,20 @@
 #!/bin/bash
 
-IS_NGINX_RUNNING=$(sudo docker inspect -f '{{.State.Running}}' mealmate-nginx)
-IS_CERTBOT_RUNNING=$(sudo docker inspect -f '{{.State.Running}}' dont_eat_alone_be_certbot_1)
-if [ "$IS_NGINX_RUNNING" == "true" ] && [ "$IS_CERTBOT_RUNNING" == "true" ]; then
-  echo "Nginx and Certbot all Processing"
+# Certbot 컨테이너 확인 및 실행
+if ! sudo docker ps --format "{{.Names}}" | grep -q "dont_eat_alone_be_certbot_1"; then
+  echo "Certbot 컨테이너가 실행되지 않았습니다. 실행 중입니다..."
+  sudo docker-compose up -d certbot
 else
-  sudo docker-compose up -d mealmate-nginx certbot
+  echo "Certbot 컨테이너가 이미 실행 중입니다."
 fi
 
+# Nginx 컨테이너 확인 및 실행
+if ! sudo docker ps --format "{{.Names}}" | grep -q "mealmate-nginx"; then
+  echo "Nginx 컨테이너가 실행되지 않았습니다. 실행 중입니다..."
+  sudo docker-compose up -d mealmate-nginx
+else
+  echo "Nginx 컨테이너가 이미 실행 중입니다."
+fi
 
 # 현재 실행 중인 Green 컨테이너 확인
 IS_GREEN=$(sudo docker ps --filter "name=^app-container$" --format "{{.Names}}")
