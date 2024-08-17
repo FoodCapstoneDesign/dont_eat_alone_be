@@ -8,7 +8,9 @@ import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto
 import io.junseok.mealmate.domain.member.service.MemberService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.view.RedirectView
 import java.security.Principal
+import javax.servlet.http.HttpServletResponse
 
 @RestController
 @RequestMapping("/api/member")
@@ -46,4 +48,7 @@ class MemberController(
         memberService.update(modifyMemberInfo,principal.name)
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/test")
+    fun test() = "test Success"
 }
