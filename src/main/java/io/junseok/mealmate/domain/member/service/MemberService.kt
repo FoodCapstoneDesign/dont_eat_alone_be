@@ -26,6 +26,9 @@ class MemberService(
         val member = Member(
             email = signUpDto.email,
             password = encoder.encode(signUpDto.password),
+            nickname = signUpDto.nickname,
+            school = signUpDto.school,
+            department = signUpDto.department,
             activated = true,
             authority = Authority.ROLE_USER
         )
@@ -38,7 +41,10 @@ class MemberService(
         val member = getMember(email)
         return MemberInfoDto(
             email = member.email,
-            password = member.password
+            password = member.password,
+            nickname = member.nickname,
+            school = member.school,
+            department = member.department
         )
     }
 

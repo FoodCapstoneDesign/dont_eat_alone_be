@@ -10,7 +10,7 @@ class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    val memberId: Long? = null,
+    var memberId: Long? = null,
 
     @Column(name = "email")
     var email: String,
@@ -18,13 +18,21 @@ class Member(
     @Column(name = "password")
     var password: String,
 
+    @Column(name = "nickname")
+    var nickname: String,
+
+    @Column(name = "school")
+    var school: String,
+
+    @Column(name = "department")
+    var department: String,
+
     @Column(name = "activated")
     var activated: Boolean,
 
     @Enumerated(EnumType.STRING)
     val authority: Authority
 ) : BaseTimeEntity() {
-
 
     fun updatePassword(password: String): Unit {
         this.password = password
