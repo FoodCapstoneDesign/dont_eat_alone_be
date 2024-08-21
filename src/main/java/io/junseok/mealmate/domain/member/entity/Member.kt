@@ -24,6 +24,9 @@ class Member(
     @Column(name = "school")
     var school: String,
 
+    @Column(name = "student_number")
+    val studentNumber: String,
+
     @Column(name = "department")
     var department: String,
 

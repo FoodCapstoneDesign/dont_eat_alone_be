@@ -28,6 +28,7 @@ class MemberService(
             password = encoder.encode(signUpDto.password),
             nickname = signUpDto.nickname,
             school = signUpDto.school,
+            studentNumber = signUpDto.studentNumber,
             department = signUpDto.department,
             activated = true,
             authority = Authority.ROLE_USER
@@ -44,6 +45,7 @@ class MemberService(
             password = member.password,
             nickname = member.nickname,
             school = member.school,
+            studentNumber = member.studentNumber,
             department = member.department
         )
     }

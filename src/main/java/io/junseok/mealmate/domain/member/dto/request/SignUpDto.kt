@@ -9,6 +9,7 @@ data class SignUpDto(
     val password: String,
     val nickname: String,
     val school: String,
+    val studentNumber: String,
     val department: String,
     val categoryRegisters: List<MemberCategoryRequest>
 )
