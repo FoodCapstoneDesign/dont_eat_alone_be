@@ -13,6 +13,7 @@ enum class ErrorCode(
     NOT_EXIST_COMMENT(HttpStatusCode.BAD_REQUEST.status, "존재하지 않는 댓글입니다!"),
     NOT_WRITE_MEMBER(HttpStatusCode.BAD_REQUEST.status, "댓글을 작성한 사용자가 아닙니다!"),
     NOT_EXIST_RESTAURANT(HttpStatusCode.BAD_REQUEST.status, "존재하지 않는 식당입니다!"),
+    NOT_EXIST_RESTAURANT_MENU(HttpStatusCode.BAD_REQUEST.status, "존재하지 않는 메뉴입니다!"),
 
     NOT_EXIST_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.status, "Security Context에 인증 정보가 없습니다!"),
     NOT_AUTHENTICATION(HttpStatusCode.UNAUTHORIZED.status, "게시판 삭제 권한이 없습니다!"),
