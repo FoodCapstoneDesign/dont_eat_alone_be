@@ -20,4 +20,9 @@ class RestaurantMenu(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     val restaurant: Restaurant
-)
+){
+    fun update(menuName: String, menuPrice: String){
+        this.menuName = menuName
+        this.menuPrice = menuPrice
+    }
+}
