@@ -3,6 +3,7 @@ package io.junseok.mealmate.domain.board.entity
 import io.junseok.mealmate.domain.base.BaseTimeEntity
 import io.junseok.mealmate.domain.board.dto.request.BoardCreate
 import io.junseok.mealmate.domain.member.entity.Member
+import io.junseok.mealmate.domain.restaurant.entity.Restaurant
 import javax.persistence.*
 
 @Entity
@@ -21,7 +22,11 @@ class Board(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    val member: Member
+    val member: Member,
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    val restaurant: Restaurant
 ) : BaseTimeEntity() {
     fun updateBoard(boardCreate: BoardCreate) {
         this.title = boardCreate.title

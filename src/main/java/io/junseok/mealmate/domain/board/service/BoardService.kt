@@ -6,23 +6,30 @@ import io.junseok.mealmate.domain.board.dto.response.toCreateBoardInfo
 import io.junseok.mealmate.domain.board.entity.Board
 import io.junseok.mealmate.domain.board.repository.BoardRepository
 import io.junseok.mealmate.domain.member.service.MemberService
+import io.junseok.mealmate.domain.restaurant.repository.RestaurantRepository
 import io.junseok.mealmate.exception.ErrorCode
 import io.junseok.mealmate.exception.MealMateException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class BoardService(
     private val boardRepository: BoardRepository,
-    private val memberService: MemberService
+    private val memberService: MemberService,
+    private val restaurantRepository: RestaurantRepository
 ) {
     @Transactional
     fun createBoard(boardCreate: BoardCreate, email: String): Long {
         val member = memberService.getMember(email)
+        val restaurant = (restaurantRepository.findByIdOrNull(boardCreate.restaurantId)
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT))
+
         val board = Board(
             title = boardCreate.title,
             content = boardCreate.content,
-            member = member
+            member = member,
+            restaurant = restaurant
         )
 
         return boardRepository.save(board).boardId!!
