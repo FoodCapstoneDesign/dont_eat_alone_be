@@ -48,7 +48,4 @@ class MemberController(
         memberService.update(modifyMemberInfo,principal.name)
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("/test")
-    fun test() = "test Success"
 }
