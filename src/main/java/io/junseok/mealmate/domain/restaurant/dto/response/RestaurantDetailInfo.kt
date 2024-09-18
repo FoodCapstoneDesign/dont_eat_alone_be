@@ -6,6 +6,8 @@ data class RestaurantDetailInfo(
     val restaurantName: String,
     val restaurantImageUrl: String,
     val restaurantType: String,
+    val restaurantTelNum: String,
+    val location: String,
     val likeCount: Int,
     val grade: Double,
     val openAt: String,

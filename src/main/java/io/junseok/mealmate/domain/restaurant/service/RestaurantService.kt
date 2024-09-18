@@ -79,6 +79,8 @@ class RestaurantService(
             restaurantImageUrl = restaurant.restaurantImageUrl,
             restaurantType = restaurant.restaurantType,
             restaurantNotice = restaurant.restaurantNotice,
+            restaurantTelNum = restaurant.telNum,
+            location = restaurant.location,
             likeCount = restaurant.likeCount,
             grade = restaurant.grade,
             openAt = restaurant.openAt,
