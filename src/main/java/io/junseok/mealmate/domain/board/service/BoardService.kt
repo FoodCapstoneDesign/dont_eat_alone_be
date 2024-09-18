@@ -9,6 +9,8 @@ import io.junseok.mealmate.domain.member.service.MemberService
 import io.junseok.mealmate.domain.restaurant.repository.RestaurantRepository
 import io.junseok.mealmate.exception.ErrorCode
 import io.junseok.mealmate.exception.MealMateException
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -52,19 +54,22 @@ class BoardService(
         board.updateBoard(boardCreate)
         return boardId
     }
-
+    @Transactional(readOnly = true)
     fun findBoard(boardId: Long): Board {
         return boardRepository.findById(boardId)
             .orElseThrow { MealMateException(ErrorCode.NOT_EXIST_BOARD) }
     }
-
+    @Transactional(readOnly = true)
     fun getBoard(boardId: Long): BoardInfo {
         val board = findBoard(boardId)
-        /*Member member = memberService.getMember(email);
-        if(board.getMember().getMemberId().equals(member.getMemberId())){
-            return getBoardInfo(board, true);
-        }
-        return getBoardInfo(board, false);*/
         return board.toCreateBoardInfo()
+    }
+
+    @Transactional(readOnly = true)
+    fun getBoardByRestaurant(restaurantId: Long, pageRequest: PageRequest): Page<BoardInfo>? {
+        val restaurant = (restaurantRepository.findByIdOrNull(restaurantId)
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT))
+        return boardRepository.findAllByRestaurant(pageRequest,restaurant)
+            .map { it.toCreateBoardInfo() }
     }
 }
