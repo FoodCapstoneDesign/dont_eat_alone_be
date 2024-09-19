@@ -6,11 +6,10 @@ import io.junseok.mealmate.domain.member.dto.request.ModifyMemberInfo
 import io.junseok.mealmate.domain.member.dto.request.SignUpDto
 import io.junseok.mealmate.domain.member.dto.response.MemberInfoDto
 import io.junseok.mealmate.domain.member.service.MemberService
+import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.servlet.view.RedirectView
 import java.security.Principal
-import javax.servlet.http.HttpServletResponse
 
 @RestController
 @RequestMapping("/api/member")
@@ -48,4 +47,8 @@ class MemberController(
         memberService.update(modifyMemberInfo,principal.name)
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/suggestion")
+    fun recommendRestaurant(principal: Principal): ResponseEntity<List<RestaurantInfo>> =
+        ResponseEntity.ok(memberService.suggestRestaurant(principal.name))
 }

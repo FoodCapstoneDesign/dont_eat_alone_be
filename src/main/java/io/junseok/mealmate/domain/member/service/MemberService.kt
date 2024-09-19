@@ -8,6 +8,8 @@ import io.junseok.mealmate.domain.member.entity.Authority
 import io.junseok.mealmate.domain.member.entity.Member
 import io.junseok.mealmate.domain.member.repository.MemberRepository
 import io.junseok.mealmate.domain.membercategory.service.MemberCategoryService
+import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo
+import io.junseok.mealmate.domain.restaurant.service.RestaurantService
 import io.junseok.mealmate.exception.ErrorCode
 import io.junseok.mealmate.exception.MealMateException
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -19,7 +21,8 @@ import java.util.regex.Pattern
 class MemberService(
     private val memberRepository: MemberRepository,
     private val memberCategoryService: MemberCategoryService,
-    private val encoder: PasswordEncoder
+    private val encoder: PasswordEncoder,
+    private val restaurantService: RestaurantService,
 ) {
     @Transactional
     fun createMember(signUpDto: SignUpDto): Long? {
@@ -34,7 +37,10 @@ class MemberService(
             authority = Authority.ROLE_USER
         )
 
-        memberCategoryService.saveCategory(signUpDto.categoryRegisters.toCategoryRegisters(), member)
+        memberCategoryService.saveCategory(
+            signUpDto.categoryRegisters.toCategoryRegisters(),
+            member
+        )
         return memberRepository.save(member).memberId
     }
 
@@ -78,7 +84,16 @@ class MemberService(
         memberCategoryService.updateMemberCategory(modifyMemberInfo.categoryRegisters, member)
     }
 
-    companion object{
+    fun suggestRestaurant(email: String): List<RestaurantInfo> {
+        val member = getMember(email)
+        val restaurantList = memberCategoryService.getMemberCategory(member)
+            .flatMap { category ->
+                restaurantService.findRestaurants(category.categoryName) ?: emptyList()
+            }
+        return restaurantList.shuffled().take(4)
+    }
+
+    companion object {
         private val EMAIL_PATTERN: Pattern =
             Pattern.compile("^[a-zA-Z0-9._%+-]{2,}+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
     }

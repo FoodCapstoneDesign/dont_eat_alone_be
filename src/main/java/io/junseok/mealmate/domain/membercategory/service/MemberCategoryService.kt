@@ -48,4 +48,7 @@ class MemberCategoryService(
             memberCategoryRepository.deleteAll(memberCategories)
         }
     }
+
+    @Transactional(readOnly = true)
+    fun getMemberCategory(member: Member) = memberCategoryRepository.findAllByMember(member)
 }
