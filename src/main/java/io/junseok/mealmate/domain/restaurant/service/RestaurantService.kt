@@ -58,9 +58,11 @@ class RestaurantService(
      * Change TO nullable
      */
     @Transactional(readOnly = true)
-    fun findRestaurants(restaurantType: String): List<RestaurantInfo>? =
-        queryRestaurantRepository.findAllRestaurant(restaurantType)
-            ?.map { it.toCreateRestaurantResponse()!! }
+    fun findRestaurants(restaurantType: String?): List<RestaurantInfo>? {
+        return restaurantType.let { queryRestaurantRepository.findAllRestaurant(restaurantType!!)
+            ?.map { it.toCreateRestaurantResponse()!! } } ?: restaurantRepository.findAll()
+                .map { it.toCreateRestaurantResponse()!! }
+    }
 
     fun showBestRestaurants(): List<RestaurantInfo> =
         restaurantRepository.findTop3ByOrderByLikeCountDesc()

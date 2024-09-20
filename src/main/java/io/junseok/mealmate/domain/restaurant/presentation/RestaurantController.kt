@@ -39,7 +39,7 @@ class RestaurantController(
      */
     @GetMapping
     fun getRestaurantList(
-        @RequestParam(value = "type") restaurantType: String
+        @RequestParam(value = "type", required = false) restaurantType: String
     ): ResponseEntity<List<RestaurantInfo>?> =
         ResponseEntity.ok(restaurantService.findRestaurants(restaurantType))
 
