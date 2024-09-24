@@ -95,6 +95,12 @@ class RestaurantService(
         restaurantRepository.findById(restaurantId)
             .orElseThrow { MealMateException(ErrorCode.NOT_EXIST_RESTAURANT) }
 
+    @Transactional(readOnly = true)
+    fun findRestaurantByName(restaurantName: String): RestaurantInfo {
+        return restaurantRepository.findByRestaurantName(restaurantName)?.toCreateRestaurantResponse()
+            ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT)
+    }
+
     companion object {
         private const val INITIAL_COUNT = 0
         private const val INITIAL_GRADE = 0.0

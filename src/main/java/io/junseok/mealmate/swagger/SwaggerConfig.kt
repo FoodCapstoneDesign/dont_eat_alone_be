@@ -4,7 +4,6 @@ import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Info
 import io.swagger.v3.oas.models.servers.Server
 import org.springframework.context.annotation.Bean
-import java.util.List
 
 @Bean
 fun customOpenAPI(): OpenAPI {
@@ -16,7 +15,7 @@ fun customOpenAPI(): OpenAPI {
                 .description("MealMate API명세서입니다!")
         )
         .servers(
-            List.of(
+            listOf(
                 Server().url("https://api.meal-mate.shop"),
                 Server().url("https://api.meal-mate.shop"),
                 Server().url("http://localhost:8080")

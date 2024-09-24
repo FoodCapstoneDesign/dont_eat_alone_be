@@ -8,7 +8,9 @@ data class RestaurantInfo(
     val restaurantImageUrl: String,
     val restaurantType: String,
     val likeCount: Int,
-    val restaurantId: Long
+    val restaurantId: Long,
+    val openAt: String,
+    val closeAt: String,
 )
 
 fun Restaurant.toCreateRestaurantResponse() = this.restaurantId?.let {
@@ -17,6 +19,8 @@ fun Restaurant.toCreateRestaurantResponse() = this.restaurantId?.let {
         restaurantImageUrl = this.restaurantImageUrl,
         restaurantType = this.restaurantType,
         likeCount = this.likeCount,
-        restaurantId = it
+        restaurantId = it,
+        openAt = this.openAt,
+        closeAt = this.closeAt,
     )
 }

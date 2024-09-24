@@ -11,5 +11,7 @@ fun MemberWish.toCreateRestaurantInfo() = RestaurantInfo(
     restaurantName = this.restaurant.restaurantName,
     restaurantImageUrl = this.restaurant.restaurantImageUrl,
     restaurantType = this.restaurant.restaurantType,
-    likeCount = this.restaurant.likeCount
+    likeCount = this.restaurant.likeCount,
+    openAt = this.restaurant.openAt,
+    closeAt = this.restaurant.closeAt
 )

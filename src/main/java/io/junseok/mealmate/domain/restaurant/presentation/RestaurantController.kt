@@ -1,6 +1,7 @@
 package io.junseok.mealmate.domain.restaurant.presentation
 
 import io.junseok.mealmate.domain.restaurant.dto.request.RestaurantRegister
+import io.junseok.mealmate.domain.restaurant.dto.request.SearchRequest
 import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantDetailInfo
 import io.junseok.mealmate.domain.restaurant.dto.response.RestaurantInfo
 import io.junseok.mealmate.domain.restaurant.service.RestaurantService
@@ -53,4 +54,8 @@ class RestaurantController(
     @GetMapping("/{restaurantId}")
     fun getRestaurantInfo(@PathVariable restaurantId: Long): ResponseEntity<RestaurantDetailInfo> =
         ResponseEntity.ok(restaurantService.findRestaurantInfo(restaurantId))
+
+    @PostMapping("/search")
+    fun searchRestaurant(@RequestBody searchRequest: SearchRequest): ResponseEntity<RestaurantInfo> =
+        ResponseEntity.ok(restaurantService.findRestaurantByName(searchRequest.restaurantName))
 }

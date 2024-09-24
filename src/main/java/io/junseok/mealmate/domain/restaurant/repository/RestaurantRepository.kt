@@ -9,4 +9,5 @@ interface RestaurantRepository : JpaRepository<Restaurant, Long> {
     fun findAllByRestaurantType(restaurantType: String): List<Restaurant>?
 
     fun findTop3ByOrderByLikeCountDesc(): List<Restaurant>
+    fun findByRestaurantName(restaurantName: String): Restaurant?
 }
