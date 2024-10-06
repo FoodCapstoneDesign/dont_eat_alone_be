@@ -28,8 +28,11 @@ class BoardController(
      * 게시판 목록 조회
      */
     @GetMapping
-    fun boardList(): ResponseEntity<List<BoardInfo>> =
-        ResponseEntity.ok(boardService.showBoardList())
+    fun boardList(
+        @RequestParam(value = "page") page: Int,
+        @RequestParam(value = "size") size: Int,
+    ): ResponseEntity<Page<BoardInfo>> =
+        ResponseEntity.ok(boardService.showBoardList(pageGenerate(page,size)))
 
 
     /**
@@ -63,7 +66,7 @@ class BoardController(
     fun bringBoardByRestaurant(
         @PathVariable restaurantId: Long,
         @RequestParam(value = "page") page: Int,
-        @RequestParam(value = "size") size: Int,
+        @RequestParam(value = "size") size: Int
     ): ResponseEntity<Page<BoardInfo>> =
         ResponseEntity.ok(boardService.getBoardByRestaurant(restaurantId,pageGenerate(page,size)))
 

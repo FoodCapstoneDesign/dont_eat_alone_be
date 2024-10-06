@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 data class BoardInfo(
     val title: String,
     val content: String,
-    val email: String,
+    val nickname: String,
     val lastTime: LocalDateTime,
     val modifyDt: LocalDateTime,
     val boardId: Long
@@ -15,7 +15,7 @@ data class BoardInfo(
 fun Board.toCreateBoardInfo() = BoardInfo(
     title = this.title,
     content = this.content,
-    email = this.member.email,
+    nickname = this.member.nickname,
     lastTime = this.createDt!!,
     modifyDt = this.modifyDt!!,
     boardId = this.boardId!!

@@ -38,8 +38,8 @@ class BoardService(
     }
 
     @Transactional(readOnly = true)
-    fun showBoardList(): List<BoardInfo> {
-        return boardRepository.findAllByOrderByCreateDtDesc()
+    fun showBoardList(pageRequest: PageRequest): Page<BoardInfo> {
+        return boardRepository.findAllByOrderByCreateDtDesc(pageRequest)
             .map { it.toCreateBoardInfo() }
     }
 
@@ -69,7 +69,7 @@ class BoardService(
     fun getBoardByRestaurant(restaurantId: Long, pageRequest: PageRequest): Page<BoardInfo>? {
         val restaurant = (restaurantRepository.findByIdOrNull(restaurantId)
             ?: throw MealMateException(ErrorCode.NOT_EXIST_RESTAURANT))
-        return boardRepository.findAllByRestaurant(pageRequest,restaurant)
+        return boardRepository.findAllByRestaurantOrderByCreateDtDesc(pageRequest,restaurant)
             .map { it.toCreateBoardInfo() }
     }
 }
