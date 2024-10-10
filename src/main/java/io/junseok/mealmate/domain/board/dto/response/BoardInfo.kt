@@ -9,7 +9,8 @@ data class BoardInfo(
     val nickname: String,
     val lastTime: LocalDateTime,
     val modifyDt: LocalDateTime,
-    val boardId: Long
+    val boardId: Long,
+    val email: String
 )
 
 fun Board.toCreateBoardInfo() = BoardInfo(
@@ -18,5 +19,6 @@ fun Board.toCreateBoardInfo() = BoardInfo(
     nickname = this.member.nickname,
     lastTime = this.createDt!!,
     modifyDt = this.modifyDt!!,
-    boardId = this.boardId!!
+    boardId = this.boardId!!,
+    email = this.member.email
 )
