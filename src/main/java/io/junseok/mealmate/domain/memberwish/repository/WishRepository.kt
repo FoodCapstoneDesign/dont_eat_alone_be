@@ -11,4 +11,5 @@ interface WishRepository : JpaRepository<MemberWish,Long> {
     fun findAllByMember(member: Member): List<MemberWish>
     fun countByMember(member: Member): Int
     fun deleteByRestaurantAndMember(restaurant: Restaurant,member: Member): Unit
+
 }

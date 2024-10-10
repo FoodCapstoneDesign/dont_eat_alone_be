@@ -59,4 +59,11 @@ class WishService(
         val member = memberService.getMember(email);
         return wishRepository.countByMember(member);
     }
+
+    @Transactional(readOnly = true)
+    fun findWishList(email: String, restaurantId: Long): Boolean{
+        val member = memberService.getMember(email)
+        val restaurant = restaurantService.findByRestaurantId(restaurantId)
+        return wishRepository.existsByRestaurantAndMember(restaurant, member)
+    }
 }

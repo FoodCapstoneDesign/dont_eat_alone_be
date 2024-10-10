@@ -13,7 +13,7 @@ class WishController(
     private val wishService: WishService
 ) {
 
-    @GetMapping("/{restaurantId}")
+    @GetMapping("/save/{restaurantId}")
     fun saveWishList(
         @PathVariable restaurantId: Long,
         principal: Principal
@@ -24,6 +24,12 @@ class WishController(
     @GetMapping
     fun getMemberWishLists(principal: Principal): ResponseEntity<MemberWishList> =
         ResponseEntity.ok(wishService.getWishList(principal.name))
+
+    @GetMapping("/{restaurantId}")
+    fun getWishList(
+        @PathVariable restaurantId: Long,
+        principal: Principal
+    ): ResponseEntity<Boolean> = ResponseEntity.ok(wishService.findWishList(principal.name,restaurantId))
 
     @DeleteMapping("/{restaurantId}")
     fun deleteWishList(
