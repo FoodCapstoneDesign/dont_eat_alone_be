@@ -31,6 +31,10 @@ class LoginAuthService(
 
         SecurityContextHolder.getContext().authentication = authentication
         val jwt = tokenProvider.createToken(authentication)
-        return TokenDto(jwt)
+        val authorities = authentication.authorities
+        return TokenDto(
+            token = jwt,
+            authority =  authorities.toString()
+        )
     }
 }
