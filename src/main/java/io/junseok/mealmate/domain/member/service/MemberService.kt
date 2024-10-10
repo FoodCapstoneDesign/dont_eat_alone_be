@@ -80,7 +80,7 @@ class MemberService(
     fun update(modifyMemberInfo: ModifyMemberInfo, email: String) {
         val member = getMember(email)
         val encodePassword = encoder.encode(modifyMemberInfo.password)
-        member.updatePassword(encodePassword)
+        member.updatePassword(encodePassword,modifyMemberInfo.nickname)
         memberCategoryService.updateMemberCategory(modifyMemberInfo.categoryRegisters, member)
     }
 

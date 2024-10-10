@@ -37,7 +37,8 @@ class Member(
     val authority: Authority
 ) : BaseTimeEntity() {
 
-    fun updatePassword(password: String): Unit {
+    fun updatePassword(password: String, nickname: String): Unit {
         this.password = password
+        this.nickname = nickname
     }
 }

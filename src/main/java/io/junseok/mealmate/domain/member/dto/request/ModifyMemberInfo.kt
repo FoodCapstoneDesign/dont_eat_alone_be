@@ -4,5 +4,6 @@ import io.junseok.mealmate.domain.membercategory.dto.request.CategoryRegister
 
 data class ModifyMemberInfo(
     val password: String,
+    val nickname: String,
     val categoryRegisters: List<CategoryRegister>
 )
